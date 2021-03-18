@@ -9,8 +9,9 @@ jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      uses: actions/checkout@v2
-      run: echo "Workflow started"
+      - uses: actions/checkout@v2
+      - name: Simple Echo
+      - run: echo "Workflow started"
 
   build:
     runs-on: ubuntu-latest
