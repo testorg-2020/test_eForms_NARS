@@ -1,7 +1,9 @@
 name: Cloud-gov Local Build
 
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - "**Dockerfile**"
 
 jobs:
   echo:
