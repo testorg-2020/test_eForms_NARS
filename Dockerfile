@@ -6,4 +6,4 @@ RUN wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.k
 RUN echo "deb https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
 RUN apt-get update -y
 RUN apt-get install cf-cli -y
-RUN cf install-plugin cflocal -y
+RUN cf install-plugin cflocal -f
