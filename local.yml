@@ -1,0 +1,4 @@
+applications:
+- name: nars-dataextr
+  memory: 256M
+  disk quota: 1024M
