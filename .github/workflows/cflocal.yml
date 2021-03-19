@@ -13,9 +13,9 @@ jobs:
       - name: Set up coud foundry CLI and cflocal
         run: |
           # make file runnable, might not be necessary
-          chmod +x ".github/build.sh"
+          chmod +x "./.github/build.sh"
           # run script
-          ".github/build.sh"
+          "./.github/build.sh"
 
   stage:
     runs-on: ubuntu-latest
