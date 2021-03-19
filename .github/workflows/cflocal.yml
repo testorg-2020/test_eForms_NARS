@@ -10,8 +10,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Build Docker Image with cflocal installed
-        run: docker build .
+      - name: Set up coud foundry CLI and cflocal
+        run: ./build.sh
 
   stage:
     runs-on: ubuntu-latest
