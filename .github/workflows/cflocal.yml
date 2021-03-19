@@ -1,6 +1,6 @@
 name: Cloud-gov Local Build
 
-on: workflow_dispatch
+on: push
 
 jobs:
   echo:
@@ -21,12 +21,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Build R image on CloudFoundry
-        id: docker_build
-        uses: docker/build-push-action@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
         with:
-          push: true
-          tags: user/app:latest
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          tag_with_ref: true
