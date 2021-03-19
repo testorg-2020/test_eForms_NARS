@@ -11,7 +11,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up coud foundry CLI and cflocal
-        run: ./build.sh
+        run: |
+          # make file runnable, might not be necessary
+          chmod +x "${GITHUB_WORKSPACE}/.github/build.sh"
+          # run script
+          "${GITHUB_WORKSPACE}/.github/build.sh"
 
   stage:
     runs-on: ubuntu-latest
