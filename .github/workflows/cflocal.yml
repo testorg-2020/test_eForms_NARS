@@ -13,7 +13,7 @@ jobs:
       - name: Make build.sh executable
         run: chmod +x ./build.sh
 
-      - name: Set up coud foundry CLI and cflocal
+      - name: Set up cloud foundry CLI and cflocal
         run: sudo ./build.sh
         shell: bash
 
@@ -21,4 +21,4 @@ jobs:
         run: cf --version
 
       - name: Stage R Shiny app
-        run: cflocal stage -b https://github.com/cloudfoundry/r-buildpack
+        run: cf local stage -b https://github.com/cloudfoundry/r-buildpack
