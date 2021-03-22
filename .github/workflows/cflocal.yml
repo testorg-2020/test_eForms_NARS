@@ -35,4 +35,4 @@ jobs:
 
       - name: Push Docker image
         id: docker_push
-        run: docker push docker.pkg.github.com/${{ GITHUB_REPOSITORY }}/nars-dataextr:${{ GITHUB_RUN_ID }}
+        run: docker push docker.pkg.github.com/${{ github.repository }}/nars-dataextr:${{ github.run_id }}
