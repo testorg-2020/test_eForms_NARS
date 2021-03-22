@@ -30,6 +30,9 @@ jobs:
       - name: Stage R Shiny app
         run: cf local stage nars-dataextr -b https://github.com/cloudfoundry/r-buildpack
 
+      - name: Echo where to push
+        run: echo "docker.pkg.github.com/$GITHUB_REPOSITORY/nars-dataextr:$GITHUB_RUN_ID"
+
       - name: Push Docker image
         id: docker_push
-        run: docker push docker.pkg.github.com/$GITHUB_REPOSITORY/nars-dataextr:$GITHUB_RUN_ID
+        run: docker push docker.pkg.github.com/${{ GITHUB_REPOSITORY }}/nars-dataextr:${{ GITHUB_RUN_ID }}
