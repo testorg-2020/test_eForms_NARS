@@ -15,14 +15,7 @@ jobs:
 
       - name: Set up coud foundry CLI and cflocal
         run: sudo ./build.sh
-
-  stage:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+        shell: bash
 
       - name: Stage R Shiny app
         run: cf local stage -b https://github.com/cloudfoundry/r-buildpack
