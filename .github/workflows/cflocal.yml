@@ -14,7 +14,7 @@ jobs:
         run: chmod +x ./build.sh
 
       - name: Set up coud foundry CLI and cflocal
-        run: ./build.sh
+        run: sudo ./build.sh
 
   stage:
     runs-on: ubuntu-latest
