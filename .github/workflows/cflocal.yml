@@ -11,10 +11,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Make build.sh executable
-        run: chmod +x ./build.sh
+        run: chmod +x .github/build.sh
 
-      - name: Set up cloud foundry CLI and cflocal
-        run: sudo ./build.sh
+      - name: Set up cloud foundry CLI
+        run: sudo .github/build.sh
+        shell: bash
+
+      - name: Make install_cflocal.sh executable
+        run: chmod +x .github/install_cflocal.sh
+
+      - name: Install cfLocal
+        run: .github/install_cflocal.sh
         shell: bash
 
       - name: Check that the plugin is recognized
