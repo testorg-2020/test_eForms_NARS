@@ -17,5 +17,8 @@ jobs:
         run: sudo ./build.sh
         shell: bash
 
+      - name: Check cf version
+        run: cf --version
+
       - name: Stage R Shiny app
-        run: cf local stage -b https://github.com/cloudfoundry/r-buildpack
+        run: cf7 local stage -b https://github.com/cloudfoundry/r-buildpack
