@@ -11,7 +11,8 @@ jobs:
         shell: python
         run: |
           import os
-          f = open(os.path.join(os.environ["GITHUB_WORKSPACE"], "local.yml"), "r")
+          os.chdir(os.environ["GITHUB_WORKSPACE"])
+          f = open("local.yml", "r")
           for line in f.readlines():
             if line.startswith("- name:"):
               os.environ["DOCKER_TAGNAME"] = line.split(":")[1].strip()
