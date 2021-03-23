@@ -34,3 +34,17 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: nars-dataextr.droplet
+
+      - name: Export droplet as Docker image
+        run: cf local export nars-dataextr.droplet -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:latest
+
+      - name: Show Files in GitHub Workspace
+        run: ls -R ${{ github.workspace }}
+
+      - name: List Docker images
+        run: docker images
+
+      - name: Push Docker image
+        run: |
+          docker login https://docker.pkg.github.com -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+          docker push docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:latest
