@@ -24,15 +24,12 @@ jobs:
         run: .github/install_cflocal.sh
         shell: bash
 
-      - name: Check that the plugin is recognized
-        run: cf plugins
-
       - name: Stage R Shiny app
         run: cf local stage nars-dataextr -b https://github.com/cloudfoundry/r-buildpack
 
-      - name: List all files
-        run: ls -R .
+      - name: Export Docker image
+        id: docker_export
+        run: cf export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
 
-      - name: Push Docker image
-        id: docker_push
-        run: docker push docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
+     - name: Push Docker image
+       run: docker push docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
