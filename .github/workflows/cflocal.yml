@@ -27,9 +27,10 @@ jobs:
       - name: Stage R Shiny app
         run: cf local stage nars-dataextr -b https://github.com/cloudfoundry/r-buildpack
 
-      - name: Export Docker image
-        id: docker_export
-        run: cf local export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
-
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
+
+      - name: Upload R Shiny droplet as artifact for future steps
+        uses: actions/upload-artifact@v2
+        with:
+          path: nars-dataextr.droplet
