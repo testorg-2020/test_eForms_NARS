@@ -1,4 +1,4 @@
-name: Cloud-gov Local Build
+name: Testing Python Scripts
 
 on: push
 
@@ -9,14 +9,14 @@ jobs:
     steps:
       - name: Get App Name from local.yml
         shell: python
-        env:
-          docker_tagname: ""
         run: |
           import os
           f = open("local.yml", "r")
           for line in f.readlines():
             if line.startswith("- name:"):
-              os.environ["docker_tagname"] = line.split(":")[1].strip()
+              os.putenv("docker_tagname", line.split(":")[1].strip())
+        env:
+          docker_tagname: ""
 
       - name: Print new environment variable
         run: echo ${{ docker_tagname }}

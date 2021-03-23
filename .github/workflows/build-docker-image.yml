@@ -1,4 +1,4 @@
-name: Cloud-gov Local Build
+name: Cloud-gov Docker Build
 
 on: workflow_dispatch
 
