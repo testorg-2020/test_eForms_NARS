@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Get App Name from local.yml
         shell: python
+        env:
+          docker_tagname: ""
         run: |
           import os
           f = open("local.yml", "r")
