@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        
       - name: Get App Name from local.yml
         shell: python
         run: |
@@ -16,6 +19,7 @@ jobs:
           for line in f.readlines():
             if line.startswith("- name:"):
               os.environ["DOCKER_TAGNAME"] = line.split(":")[1].strip()
+          f.close()
         env:
           docker_tagname: ""
 
