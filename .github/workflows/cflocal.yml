@@ -30,8 +30,8 @@ jobs:
       - name: Stage R Shiny app
         run: cf local stage nars-dataextr -b https://github.com/cloudfoundry/r-buildpack
 
-      - name: list files
-        run: ls -r .
+      - name: List all files
+        run: ls -R .
 
       - name: Push Docker image
         id: docker_push
