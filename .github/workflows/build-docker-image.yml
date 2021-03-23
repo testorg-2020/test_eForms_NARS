@@ -30,3 +30,9 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+      - name: Upload Docker image produced as artifact for future jobs
+        uses: actions/upload-artifact@v2
+
+      - name: Push Docker image
+        run: docker push docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
