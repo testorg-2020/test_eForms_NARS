@@ -11,10 +11,10 @@ jobs:
         shell: python
         run: |
           import os
-          f = open(os.environ["GITHUB_WORKSPACE"] + "local.yml", "r")
+          f = open(os.environ["GITHUB_WORKSPACE"] + "/local.yml", "r")
           for line in f.readlines():
             if line.startswith("- name:"):
-              os.putenv("DOCKER_TAGNAME", line.split(":")[1].strip())
+              os.environ["DOCKER_TAGNAME"] = line.split(":")[1].strip())
         env:
           docker_tagname: ""
 
