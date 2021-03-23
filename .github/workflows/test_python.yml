@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-        
+
       - name: Get App Name from local.yml
         shell: python
         run: |
@@ -23,5 +23,5 @@ jobs:
         env:
           docker_tagname: ""
 
-      # - name: Print new environment variable
-      #   run: echo ${{ docker_tagname }}
+      - name: Print new environment variable
+        run: echo ${{ docker_tagname }}
