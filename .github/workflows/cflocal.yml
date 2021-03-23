@@ -31,5 +31,5 @@ jobs:
         id: docker_export
         run: cf local export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
 
-      - name: Show Files in Working Directory
-        run: ls -R .
+      - name: Show Files in GitHub Workspace
+        run: ls -R ${{ github.workspace }}
