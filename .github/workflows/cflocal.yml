@@ -30,13 +30,13 @@ jobs:
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
 
-      - name: Upload R Shiny droplet as artifact for future steps
-        uses: actions/upload-artifact@v2
-        with:
-          path: nars-dataextr.droplet
+      # - name: Upload R Shiny droplet as artifact for future steps
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     path: nars-dataextr.droplet
 
       - name: Export droplet as Docker image
-        run: cf local export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:latest
+        run: cf local export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
 
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
@@ -44,7 +44,13 @@ jobs:
       - name: List Docker images
         run: docker images
 
+      - name: Login to GitHub packages
+        uses: uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Push Docker image
-        run: |
-          docker login https://docker.pkg.github.com -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-          docker push docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:latest
+        shell: bash
+        run: docker push docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
