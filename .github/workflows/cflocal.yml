@@ -36,7 +36,7 @@ jobs:
           path: nars-dataextr.droplet
 
       - name: Export droplet as Docker image
-        run: cf local export nars-dataextr.droplet -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:latest
+        run: cf local export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:latest
 
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
