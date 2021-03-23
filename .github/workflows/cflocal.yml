@@ -29,7 +29,7 @@ jobs:
 
       - name: Export Docker image
         id: docker_export
-        run: cf export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
+        run: cf local export nars-dataextr -r docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
 
       - name: Push Docker image
         run: docker push docker.pkg.github.com/testorg-2020/test_eforms_nars/nars-dataextr:${{ github.run_id }}
