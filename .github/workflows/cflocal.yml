@@ -19,6 +19,12 @@ jobs:
       - name: Print app name
         run: echo ${{ env.app_name }}
 
+      - name: Get docker tag
+        run: python .github/get_docker_tag >> $GITHUB_ENV
+
+      - name: Print docker tag
+        run: echo ${{ env.docker_tag }}
+
       - name: Make build.sh executable
         run: chmod +x .github/build.sh
 
@@ -34,7 +40,7 @@ jobs:
         shell: bash
 
       - name: Stage R Shiny app
-        run: cf local stage ${{ env.app_name }} -b https://github.com/cloudfoundry/r-buildpack.git
+        run: cf local stage "${{ env.app_name }}" -b https://github.com/cloudfoundry/r-buildpack.git
 
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
@@ -45,7 +51,7 @@ jobs:
       #     path: nars-dataextr.droplet
 
       - name: Export droplet as Docker image
-        run: cf local export ${{ env.app_name }} -r "${{ env.app_name }}:${{ github.run_id }}"
+        run: cf local export "${{ env.app_name }}" -r "${{ env.docker_tag }}"
 
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
@@ -62,4 +68,4 @@ jobs:
 
       - name: Push Docker image to GitHub Container Registry
         shell: bash
-        run: docker push "${{ env.app_name }}:${{ github.run_id }}"
+        run: docker push "${{ env.docker_tag }}"
