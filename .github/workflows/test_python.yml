@@ -22,7 +22,9 @@ jobs:
           f = open("local.yml", "r")
           for line in f.readlines():
             if line.startswith("- name:"):
-              os.environ["APP_NAME"] = line.split(":")[1].strip()
+              print(line.split(":")[1].strip())
+              os.putenv("APP_NAME", line.split(":")[1].strip())
+              # os.environ["APP_NAME"] = line.split(":")[1].strip()
           f.close()
 
       - name: Print new environment variable
