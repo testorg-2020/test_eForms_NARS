@@ -20,7 +20,7 @@ jobs:
         run: echo ${{ env.app_name }}
 
       - name: Get docker tag
-        run: python -c "print('docker_tag=ghcr.io/' + '"'${{ github.repository }}.lower() + '/' + ${{ env.app_name }} + ':' + ${{ github.run_id }})" >> $GITHUB_ENV
+        run: echo 'print("docker_tag=ghcr.io/" + "${{ github.repository }}".lower() + "/" + "${{ env.app_name }}" + ":" + "${{ github.run_id }})"' | python >> $GITHUB_ENV
 
       - name: Print docker tag
         run: echo ${{ env.docker_tag }}
