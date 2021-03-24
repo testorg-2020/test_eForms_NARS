@@ -20,7 +20,7 @@ jobs:
         run: echo ${{ env.app_name }}
 
       - name: Get docker tag
-        run: python .github/get_docker_tag >> $GITHUB_ENV
+        run: python .github/get_docker_tag.py >> $GITHUB_ENV
 
       - name: Print docker tag
         run: echo ${{ env.docker_tag }}
