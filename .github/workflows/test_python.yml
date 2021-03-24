@@ -26,4 +26,4 @@ jobs:
           f.close()
 
       - name: Print new environment variable
-        run: echo ${{ APP_NAME }}
+        run: echo $APP_NAME
