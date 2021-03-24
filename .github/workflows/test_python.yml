@@ -1,4 +1,4 @@
-name: Testing Python Scripts
+name: Testing Python or Bash Scripts to update env
 
 on:
   push:
@@ -26,6 +26,19 @@ jobs:
               os.putenv("APP_NAME", line.split(":")[1].strip())
               # os.environ["APP_NAME"] = line.split(":")[1].strip()
           f.close()
+
+      - name: Print new environment variable
+        run: echo $APP_NAME
+
+      - name: Bash script to update
+        shell: bash
+        run: |
+          cat local.yml | while -r read line;
+          do if [[ $line = *name:* ]]; then
+          echo "$line" | cut -d ":" -f 2 | xargs;
+          fi;
+          done
+          >> $APP_NAME
 
       - name: Print new environment variable
         run: echo $APP_NAME
