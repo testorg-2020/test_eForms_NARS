@@ -1,11 +1,14 @@
 name: Testing Python Scripts
 
 on: push
+  branches:
+    - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      APP_NAME: ""
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -18,10 +21,8 @@ jobs:
           f = open("local.yml", "r")
           for line in f.readlines():
             if line.startswith("- name:"):
-              os.environ["DOCKER_TAGNAME"] = line.split(":")[1].strip()
+              os.environ["APP_NAME"] = line.split(":")[1].strip()
           f.close()
-        env:
-          docker_tagname: ""
 
       - name: Print new environment variable
-        run: echo ${{ docker_tagname }}
+        run: echo ${{ APP_NAME }}
