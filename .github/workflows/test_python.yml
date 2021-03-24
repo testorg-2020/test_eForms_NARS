@@ -35,10 +35,9 @@ jobs:
         run: |
           cat local.yml | while read -r line;
           do if [[ $line = *name:* ]]; then
-          echo "$line" | cut -d ":" -f 2 | xargs;
+          echo 'app_name=echo "$line" | cut -d ":" -f 2 | xargs';
           fi;
-          done
-          >> $APP_NAME
+          done >> $GITHUB_ENV
 
       - name: Print new environment variable
-        run: echo $APP_NAME
+        run: echo ${{ env.app_name }}
