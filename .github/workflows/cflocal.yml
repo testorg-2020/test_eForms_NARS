@@ -3,7 +3,7 @@ name: Cloud-gov Local Build
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
         run: echo ${{ env.app_name }}
 
       - name: Get docker tag
-        run: echo 'print("docker_tag=ghcr.io/" + "${{ github.repository }}".lower() + "/" + "${{ env.app_name }}" + ":" + "${{ github.run_id }}")' | python >> $GITHUB_ENV
+        run: echo 'print("docker_tag=ghcr.io/" + "${{ github.repository }}".lower() + "/" + "${{ env.app_name }}" + ":" + "latest")' | python >> $GITHUB_ENV
 
       - name: Print docker tag
         run: echo ${{ env.docker_tag }}
