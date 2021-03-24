@@ -40,7 +40,7 @@ jobs:
       #     done >> $GITHUB_ENV
 
       - name: Bash calling python
-        run: python ./github/get_app_name.py >> $GITHUB_ENV
+        run: python .github/get_app_name.py >> $GITHUB_ENV
 
       - name: Print new environment variable
         run: echo ${{ env.app_name }}
