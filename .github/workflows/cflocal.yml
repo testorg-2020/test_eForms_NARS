@@ -1,6 +1,9 @@
 name: Cloud-gov Local Build
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -9,6 +12,12 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+      - name: Get app name from local.yml
+        run: python .github/get_app_name.py >> $GITHUB_ENV
+
+      - name: Print app name
+        run: echo ${{ env.app_name }}
 
       - name: Make build.sh executable
         run: chmod +x .github/build.sh
@@ -25,7 +34,7 @@ jobs:
         shell: bash
 
       - name: Stage R Shiny app
-        run: cf local stage nars-dataextr -b https://github.com/cloudfoundry/r-buildpack
+        run: cf local stage ${{ env.app_name }} -b https://github.com/cloudfoundry/r-buildpack.git
 
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
@@ -35,11 +44,8 @@ jobs:
       #   with:
       #     path: nars-dataextr.droplet
 
-      - name: Generate tag for Docker image
-        run: echo "ghcr.io/${{ github.repository }}/nars-dataextr:${{ github.run_id }}" | tr '[:upper:]' '[:lower:]' >> ${{ docker_tagname }}
-
       - name: Export droplet as Docker image
-        run: cf local export nars-dataextr -r ${{ docker_tagname }}
+        run: cf local export ${{ env.app_name }} -r "${{ env.app_name }}:${{ github.run_id }}"
 
       - name: Show Files in GitHub Workspace
         run: ls -R ${{ github.workspace }}
@@ -56,4 +62,4 @@ jobs:
 
       - name: Push Docker image to GitHub Container Registry
         shell: bash
-        run: docker push ${{ docker_tagname }}
+        run: docker push "${{ env.app_name }}:${{ github.run_id }}"
