@@ -33,7 +33,7 @@ jobs:
       - name: Bash script to update
         shell: bash
         run: |
-          cat local.yml | while -r read line;
+          cat local.yml | while read -r line;
           do if [[ $line = *name:* ]]; then
           echo "$line" | cut -d ":" -f 2 | xargs;
           fi;
